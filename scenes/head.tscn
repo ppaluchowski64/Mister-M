@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://cidhl1487nc7r"]
+
+[ext_resource type="Script" uid="uid://csbh80xoy52mk" path="res://scripts/head.gd" id="1_d75dd"]
+[ext_resource type="Texture2D" uid="uid://dc3h53rjghf6x" path="res://icon.svg" id="1_nsfte"]
+
+[node name="Head" type="RigidBody2D"]
+script = ExtResource("1_d75dd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_nsfte")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
