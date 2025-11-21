@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cidhl1487nc7r"]
+[gd_scene load_steps=6 format=3 uid="uid://cidhl1487nc7r"]
 
 [ext_resource type="Script" uid="uid://csbh80xoy52mk" path="res://scripts/head.gd" id="1_d75dd"]
 [ext_resource type="Shader" uid="uid://b6p8uuhhwbttl" path="res://shaders/outline.gdshader" id="2_a7yy4"]
@@ -9,12 +9,18 @@ shader = ExtResource("2_a7yy4")
 shader_parameter/outline_color = Color(0, 0, 0, 1)
 shader_parameter/is_visible = true
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_a7yy4"]
+radius = 13.0
+
 [node name="Head" type="RigidBody2D"]
+linear_damp_mode = 1
 script = ExtResource("1_d75dd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_cwpmm")
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("2_d75dd")
 hframes = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_a7yy4")

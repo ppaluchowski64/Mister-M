@@ -42,6 +42,10 @@ up={
 ]
 }
 
+[physics]
+
+3d/default_linear_damp=0.0
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

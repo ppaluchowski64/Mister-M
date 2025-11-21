@@ -2,18 +2,22 @@ extends RigidBody2D
 class_name Head
 
 @export var barrier_spawn_timer: Timer
+@export var body_sprite: AnimatedSprite2D
 
 enum State {BOUNCE, FLY}
 var state: State = State.BOUNCE
 
-var force_x: float = 30
-
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	match state:
 		State.BOUNCE:
+			global_position.x = 0
+			
 			if global_position.y > 0:
 				apply_impulse(Vector2i(0, -50))
 				angular_velocity = 5
+				
+				if not body_sprite.is_playing():
+					body_sprite.play()
 			
 			if Input.is_action_just_pressed("hit"):
 				state = State.FLY
@@ -21,8 +25,7 @@ func _physics_process(delta: float) -> void:
 				barrier_spawn_timer.start()
 		
 		State.FLY:
-			apply_force(Vector2(force_x, -700))
-			force_x = max(force_x - delta, 0)
+			apply_force(Vector2(0, -700))
 			
 			angular_velocity = 2
 			

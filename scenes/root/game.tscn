@@ -1,9 +1,61 @@
-[gd_scene load_steps=5 format=3 uid="uid://fxhuql5ud0qf"]
+[gd_scene load_steps=16 format=3 uid="uid://fxhuql5ud0qf"]
 
-[ext_resource type="Texture2D" uid="uid://ceail7goxy471" path="res://graphics/background_placeholders.png" id="1_ncd4d"]
 [ext_resource type="PackedScene" uid="uid://cidhl1487nc7r" path="res://scenes/head.tscn" id="1_rf1xt"]
 [ext_resource type="Script" uid="uid://o6oil05p484t" path="res://scripts/game.gd" id="1_wcdyl"]
 [ext_resource type="Script" uid="uid://5en8dbn8pu1o" path="res://scripts/camera.gd" id="2_7dpn4"]
+[ext_resource type="Texture2D" uid="uid://3rc37ue17d54" path="res://graphics/background.png" id="2_bq78c"]
+[ext_resource type="Shader" uid="uid://b6p8uuhhwbttl" path="res://shaders/outline.gdshader" id="4_bq78c"]
+[ext_resource type="Texture2D" uid="uid://dq7cu2yb16k5f" path="res://graphics/guy.png" id="4_o8yes"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qygq"]
+shader = ExtResource("4_bq78c")
+shader_parameter/outline_color = Color(0, 0, 0, 1)
+shader_parameter/is_visible = true
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bq78c"]
+atlas = ExtResource("4_o8yes")
+region = Rect2(0, 0, 35, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1qygq"]
+atlas = ExtResource("4_o8yes")
+region = Rect2(35, 0, 35, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rh43"]
+atlas = ExtResource("4_o8yes")
+region = Rect2(70, 0, 35, 35)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86ske"]
+atlas = ExtResource("4_o8yes")
+region = Rect2(105, 0, 35, 35)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ijxjl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bq78c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1qygq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rh43")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86ske")
+}],
+"loop": false,
+"name": &"jiggle",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bq78c"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_1qygq"]
+normal = Vector2(0, 1)
+distance = -91.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bq78c"]
+distance = -4.0
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("head", "score_label")]
 script = ExtResource("1_wcdyl")
@@ -28,19 +80,48 @@ theme_override_font_sizes/font_size = 16
 text = "score: -"
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
-repeat_size = Vector2(250, 0)
-repeat_times = 4
+repeat_size = Vector2(400, 0)
+repeat_times = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
-texture = ExtResource("1_ncd4d")
+position = Vector2(0, -20)
+texture = ExtResource("2_bq78c")
+flip_h = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="Parallax2D"]
+position = Vector2(200, -20)
+texture = ExtResource("2_bq78c")
 
 [node name="Bariers" type="Node2D" parent="."]
 
 [node name="BarierSpawnTimer" type="Timer" parent="."]
 
-[node name="Head" parent="." node_paths=PackedStringArray("barrier_spawn_timer") instance=ExtResource("1_rf1xt")]
+[node name="Head" parent="." node_paths=PackedStringArray("barrier_spawn_timer", "body_sprite") instance=ExtResource("1_rf1xt")]
 position = Vector2(0, -20)
 barrier_spawn_timer = NodePath("../BarierSpawnTimer")
+body_sprite = NodePath("../Body")
+
+[node name="Body" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_1qygq")
+position = Vector2(-20, 23)
+sprite_frames = SubResource("SpriteFrames_ijxjl")
+animation = &"jiggle"
+frame = 3
+frame_progress = 1.0
+flip_h = true
+
+[node name="StaticBody" type="StaticBody2D" parent="."]
+position = Vector2(-9, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody"]
+position = Vector2(9, 0)
+shape = SubResource("RectangleShape2D_bq78c")
+
+[node name="CollisionShapeBottom" type="CollisionShape2D" parent="StaticBody"]
+shape = SubResource("WorldBoundaryShape2D_1qygq")
+
+[node name="CollisionShapeTop" type="CollisionShape2D" parent="StaticBody"]
+shape = SubResource("WorldBoundaryShape2D_bq78c")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("head")]
 position = Vector2(0, -20)
