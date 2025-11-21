@@ -24,6 +24,10 @@ window/stretch/mode="viewport"
 window/stretch/scale=4.0
 window/stretch/scale_mode="integer"
 
+[gui]
+
+theme/custom_font="uid://1kgcdfw7yk15"
+
 [input]
 
 hit={

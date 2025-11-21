@@ -9,6 +9,7 @@ func _physics_process(_delta: float) -> void:
 		State.BOUNCE:
 			if global_position.y > 0:
 				apply_impulse(Vector2i(0, -50))
+				angular_velocity = 5
 			
 			if Input.is_action_just_pressed("hit"):
 				state = State.FLY
@@ -16,6 +17,7 @@ func _physics_process(_delta: float) -> void:
 		
 		State.FLY:
 			apply_force(Vector2i(0, -700))
+			angular_velocity = 2
 			
 			if Input.is_action_just_pressed("up"):
 				if linear_velocity.x < 100:
