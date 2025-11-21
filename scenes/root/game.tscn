@@ -34,10 +34,17 @@ repeat_times = 4
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
 texture = ExtResource("1_ncd4d")
 
-[node name="Head" parent="." instance=ExtResource("1_rf1xt")]
+[node name="Bariers" type="Node2D" parent="."]
+
+[node name="BarierSpawnTimer" type="Timer" parent="."]
+
+[node name="Head" parent="." node_paths=PackedStringArray("barrier_spawn_timer") instance=ExtResource("1_rf1xt")]
 position = Vector2(0, -20)
+barrier_spawn_timer = NodePath("../BarierSpawnTimer")
 
 [node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("head")]
 position = Vector2(0, -20)
 script = ExtResource("2_7dpn4")
 head = NodePath("../Head")
+
+[connection signal="timeout" from="BarierSpawnTimer" to="." method="_on_barier_spawn_timer_timeout"]
