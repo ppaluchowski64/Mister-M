@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=3 uid="uid://fxhuql5ud0qf"]
+[gd_scene load_steps=30 format=3 uid="uid://fxhuql5ud0qf"]
 
 [ext_resource type="PackedScene" uid="uid://cidhl1487nc7r" path="res://scenes/head.tscn" id="1_rf1xt"]
 [ext_resource type="Script" uid="uid://o6oil05p484t" path="res://scripts/game.gd" id="1_wcdyl"]
 [ext_resource type="PackedScene" uid="uid://4kfdtpq0xjf4" path="res://scenes/ability_indicator.tscn" id="2_1qygq"]
+[ext_resource type="Script" uid="uid://bopkpcy6lwhpl" path="res://scripts/bonus.gd" id="2_2mmsw"]
 [ext_resource type="Script" uid="uid://5en8dbn8pu1o" path="res://scripts/camera.gd" id="2_7dpn4"]
 [ext_resource type="Texture2D" uid="uid://3rc37ue17d54" path="res://graphics/background.png" id="2_bq78c"]
 [ext_resource type="Texture2D" uid="uid://dmx7y7wck7edq" path="res://graphics/tutorial.png" id="2_ijxjl"]
@@ -12,6 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://dq7cu2yb16k5f" path="res://graphics/guy.png" id="4_o8yes"]
 [ext_resource type="Script" uid="uid://d3qq32mdyfp4f" path="res://scripts/secret.gd" id="8_2mmsw"]
 [ext_resource type="AudioStream" uid="uid://cy6ljsgwa30mx" path="res://audio/sfx/dead.wav" id="11_55u7g"]
+
+[sub_resource type="Curve" id="Curve_2mmsw"]
+_data = [Vector2(0.0058139563, 0.04494381), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_l77qo"]
+offsets = PackedFloat32Array(0, 0.5068493, 1)
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 1)
 
 [sub_resource type="Animation" id="Animation_3rh43"]
 length = 0.001
@@ -358,6 +367,163 @@ highscore_label = NodePath("HighscoreLabel")
 ui_animation = NodePath("UI/AnimationPlayer")
 secrets = NodePath("Secrets")
 
+[node name="Window" type="Window" parent="."]
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(180, 120)
+visible = false
+exclusive = true
+borderless = true
+script = ExtResource("2_2mmsw")
+
+[node name="Control" type="Control" parent="Window"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Window/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "What's the best operating system out there?"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="GridContainer" type="GridContainer" parent="Window/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_top = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 2
+
+[node name="TextureButton1" type="TextureButton" parent="Window/Control/GridContainer"]
+self_modulate = Color(1, 1, 1, 0.25)
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+texture_normal = ExtResource("4_86ske")
+
+[node name="Label" type="Label" parent="Window/Control/GridContainer/TextureButton1"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -8.0
+offset_right = 20.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "macOS"
+
+[node name="TextureButton2" type="TextureButton" parent="Window/Control/GridContainer"]
+self_modulate = Color(1, 1, 1, 0.25)
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+texture_normal = ExtResource("4_86ske")
+
+[node name="Label" type="Label" parent="Window/Control/GridContainer/TextureButton2"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -8.0
+offset_right = 20.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "macOS"
+
+[node name="TextureButton3" type="TextureButton" parent="Window/Control/GridContainer"]
+self_modulate = Color(1, 1, 1, 0.25)
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+texture_normal = ExtResource("4_86ske")
+
+[node name="Label" type="Label" parent="Window/Control/GridContainer/TextureButton3"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -8.0
+offset_right = 20.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "macOS"
+
+[node name="TextureButton4" type="TextureButton" parent="Window/Control/GridContainer"]
+self_modulate = Color(1, 1, 1, 0.25)
+custom_minimum_size = Vector2(50, 30)
+layout_mode = 2
+texture_normal = ExtResource("4_86ske")
+
+[node name="Label" type="Label" parent="Window/Control/GridContainer/TextureButton4"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.5
+offset_top = -8.0
+offset_right = 20.5
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "macOS"
+
+[node name="Control" type="Control" parent="Window/Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -40.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Window/Control/Control"]
+emitting = false
+amount = 64
+lifetime = 3.0
+one_shot = true
+explosiveness = 0.5
+lifetime_randomness = 0.3
+direction = Vector2(0, -1)
+gravity = Vector2(0, 100)
+initial_velocity_min = 79.8
+initial_velocity_max = 140.8
+angular_velocity_min = 213.75
+angular_velocity_max = 274.63
+linear_accel_min = 12.0
+linear_accel_max = 12.0
+scale_amount_min = 2.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_2mmsw")
+color_initial_ramp = SubResource("Gradient_l77qo")
+
 [node name="Tutorial" type="Sprite2D" parent="."]
 position = Vector2(0, 200)
 texture = ExtResource("2_ijxjl")
@@ -436,26 +602,26 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
 
-[node name="SettingsButton" type="TextureButton" parent="UI/MarginContainer/ButtonsLeft"]
+[node name="BonusButton" type="TextureButton" parent="UI/MarginContainer/ButtonsLeft"]
 self_modulate = Color(1, 1, 1, 0.25)
 layout_mode = 2
 focus_mode = 0
 texture_normal = ExtResource("4_86ske")
 
-[node name="Label" type="Label" parent="UI/MarginContainer/ButtonsLeft/SettingsButton"]
+[node name="Label" type="Label" parent="UI/MarginContainer/ButtonsLeft/BonusButton"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -21.0
+offset_left = -10.5
 offset_top = -8.0
-offset_right = 21.0
+offset_right = 10.5
 offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "settings"
+text = "???"
 
 [node name="ButtonsRight" type="VBoxContainer" parent="UI/MarginContainer"]
 z_index = 25
@@ -585,6 +751,11 @@ text = "highscore:-"
 [node name="AudioDeath" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_55u7g")
 
+[connection signal="pressed" from="Window/Control/GridContainer/TextureButton1" to="Window" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Window/Control/GridContainer/TextureButton2" to="Window" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Window/Control/GridContainer/TextureButton3" to="Window" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="Window/Control/GridContainer/TextureButton4" to="Window" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="UI/MarginContainer/ButtonsLeft/BonusButton" to="Window" method="_on_bonus_button_pressed"]
 [connection signal="pressed" from="UI/MarginContainer/ButtonsRight/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="timeout" from="BarrierSpawnTimer" to="." method="_on_barrier_spawn_timer_timeout"]
 [connection signal="timeout" from="AppleSpawnTimer" to="." method="_on_apple_spawn_timer_timeout"]
