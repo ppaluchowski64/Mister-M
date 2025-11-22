@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cidhl1487nc7r" path="res://scenes/head.tscn" id="1_rf1xt"]
 [ext_resource type="Script" uid="uid://o6oil05p484t" path="res://scripts/game.gd" id="1_wcdyl"]
 [ext_resource type="PackedScene" uid="uid://4kfdtpq0xjf4" path="res://scenes/ability_indicator.tscn" id="2_1qygq"]
-[ext_resource type="Script" uid="uid://bopkpcy6lwhpl" path="res://scripts/bonus.gd" id="2_2mmsw"]
+[ext_resource type="Script" path="res://scripts/bonus.gd" id="2_2mmsw"]
 [ext_resource type="Script" uid="uid://5en8dbn8pu1o" path="res://scripts/camera.gd" id="2_7dpn4"]
 [ext_resource type="Texture2D" uid="uid://3rc37ue17d54" path="res://graphics/background.png" id="2_bq78c"]
 [ext_resource type="Texture2D" uid="uid://dmx7y7wck7edq" path="res://graphics/tutorial.png" id="2_ijxjl"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dyy8pmdx20d2s" path="res://graphics/button.png" id="4_86ske"]
 [ext_resource type="Shader" uid="uid://b6p8uuhhwbttl" path="res://shaders/outline.gdshader" id="4_bq78c"]
 [ext_resource type="Texture2D" uid="uid://dq7cu2yb16k5f" path="res://graphics/guy.png" id="4_o8yes"]
-[ext_resource type="Script" uid="uid://d3qq32mdyfp4f" path="res://scripts/secret.gd" id="8_2mmsw"]
+[ext_resource type="Script" path="res://scripts/secret.gd" id="8_2mmsw"]
 [ext_resource type="AudioStream" uid="uid://cy6ljsgwa30mx" path="res://audio/sfx/dead.wav" id="11_55u7g"]
 
 [sub_resource type="Curve" id="Curve_2mmsw"]
