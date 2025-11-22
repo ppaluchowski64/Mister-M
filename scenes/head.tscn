@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cidhl1487nc7r"]
+[gd_scene load_steps=9 format=3 uid="uid://cidhl1487nc7r"]
 
 [ext_resource type="Script" uid="uid://csbh80xoy52mk" path="res://scripts/head.gd" id="1_d75dd"]
 [ext_resource type="Shader" uid="uid://b6p8uuhhwbttl" path="res://shaders/outline.gdshader" id="2_a7yy4"]
 [ext_resource type="Texture2D" uid="uid://bfbgqbr1ch178" path="res://graphics/fade_effect.png" id="2_cwpmm"]
 [ext_resource type="Texture2D" uid="uid://dk7bcguyp5vyg" path="res://graphics/moscyc_head.png" id="2_d75dd"]
+[ext_resource type="Texture2D" uid="uid://b6eu7xaq6pdqn" path="res://graphics/glasses.png" id="5_6rdic"]
 
 [sub_resource type="Gradient" id="Gradient_6rdic"]
 colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0)
@@ -19,6 +20,7 @@ radius = 13.0
 [node name="Head" type="RigidBody2D" groups=["head"]]
 linear_damp_mode = 1
 script = ExtResource("1_d75dd")
+input_mode = null
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
@@ -33,6 +35,12 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("2_d75dd")
 flip_h = true
 hframes = 24
+
+[node name="GlassesSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("5_6rdic")
+offset = Vector2(0, 1)
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_a7yy4")

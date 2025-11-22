@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cu182q7gi64ck"]
+[gd_scene load_steps=14 format=3 uid="uid://cu182q7gi64ck"]
 
 [ext_resource type="Script" uid="uid://uo5sqckrbfds" path="res://scripts/laser.gd" id="1_a7dhc"]
 [ext_resource type="Texture2D" uid="uid://bqjhqdu857tk7" path="res://graphics/laser.png" id="1_xmihv"]
@@ -74,10 +74,36 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="Curve" id="Curve_a7dhc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Laser" type="Node2D"]
 script = ExtResource("1_a7dhc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y4m2n")
 autoplay = "default"
-frame_progress = 0.39308977
+
+[node name="Particles1" type="CPUParticles2D" parent="."]
+position = Vector2(0, 44)
+lifetime = 0.5
+direction = Vector2(0, -1)
+spread = 35.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_a7dhc")
+color = Color(0.89, 0.77044326, 0.6141, 1)
+
+[node name="Particles2" type="CPUParticles2D" parent="."]
+position = Vector2(0, -44)
+lifetime = 0.5
+direction = Vector2(0, 1)
+spread = 35.0
+gravity = Vector2(0, 100)
+initial_velocity_max = 100.0
+scale_amount_max = 2.0
+scale_amount_curve = SubResource("Curve_a7dhc")
+color = Color(0.89, 0.77044326, 0.6141, 1)

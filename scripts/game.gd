@@ -3,6 +3,9 @@ extends Node2D
 @export var head: Head
 @export var barriers: Node2D
 @export var barrier_spawn_timer: Timer
+@export var camera: Camera2D
+@export var ui: CanvasLayer
+@export var tutorial: Sprite2D
 
 @export var score_label: Label
 @export var highscore_label: Label
@@ -11,6 +14,9 @@ extends Node2D
 
 var score: float = 0
 var highscore: float = 0
+var on_tutorial: bool = false
+
+var tutorial_tween: Tween
 
 func _ready() -> void:
 	head.restart.connect(on_restart)
@@ -33,6 +39,12 @@ func _physics_process(_delta: float) -> void:
 	
 	if Input.is_action_just_pressed("hit") and ui_animation.current_animation == "middle":
 		ui_animation.play("exit")
+	
+	if Input.is_action_just_pressed("hit") and on_tutorial:
+		tutorial_tween = create_tween()
+		tutorial_tween.set_trans(Tween.TRANS_LINEAR)
+		tutorial_tween.tween_property(tutorial, "self_modulate:a", 0, 0.5)
+		tutorial_tween.tween_callback(get_tree().reload_current_scene)
 
 func _on_barrier_spawn_timer_timeout() -> void:
 	if head.fire_cooldown.is_stopped() and randi_range(0, 4) == 0:
@@ -68,3 +80,20 @@ func on_restart() -> void:
 	var file: FileAccess = FileAccess.open("user://gamedata.data", FileAccess.WRITE)
 	file.store_var(highscore)
 	file.close()
+	
+	head.input_mode = 0
+	await get_tree().create_timer(0.5).timeout
+	head.input_mode = 2
+
+func _on_tutorial_button_pressed() -> void:
+	on_tutorial = true
+	
+	ui.follow_viewport_enabled = true
+	ui.offset -= get_viewport_rect().size / 2 + Vector2(0, 20)
+	
+	tutorial_tween = create_tween()
+	
+	tutorial_tween.set_ease(Tween.EASE_IN_OUT)
+	tutorial_tween.set_trans(Tween.TRANS_CUBIC)
+	
+	tutorial_tween.tween_property(camera, "global_position:y", 200, 1)

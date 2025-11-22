@@ -17,6 +17,8 @@ class_name Head
 @onready var fire_timer: Timer = $FireTimer
 @onready var fire_cooldown: Timer = $FireCooldown
 
+@onready var glasses_sprite: Sprite2D = $GlassesSprite
+
 enum State {BOUNCE, FLY, DASH}
 var state: State = State.BOUNCE
 
@@ -46,7 +48,10 @@ func _physics_process(_delta: float) -> void:
 					body_sprite.play()
 			
 			if (Input.is_action_just_pressed("hit") and input_mode == 2) or input_mode == 1:
-				input_mode = 2
+				if input_mode == 1:
+					input_mode = 2
+					remove_child(glasses_sprite)
+				
 				state = State.FLY
 				apply_impulse(Vector2i(200, -100))
 				barrier_spawn_timer.start()
