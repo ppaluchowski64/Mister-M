@@ -1,0 +1,83 @@
+[gd_scene load_steps=13 format=3 uid="uid://cu182q7gi64ck"]
+
+[ext_resource type="Script" uid="uid://uo5sqckrbfds" path="res://scripts/laser.gd" id="1_a7dhc"]
+[ext_resource type="Texture2D" uid="uid://bqjhqdu857tk7" path="res://graphics/laser.png" id="1_xmihv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7dhc"]
+atlas = ExtResource("1_xmihv")
+region = Rect2(0, 0, 10, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jjj73"]
+atlas = ExtResource("1_xmihv")
+region = Rect2(10, 0, 10, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_412cd"]
+atlas = ExtResource("1_xmihv")
+region = Rect2(20, 0, 10, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q8rul"]
+atlas = ExtResource("1_xmihv")
+region = Rect2(30, 0, 10, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_788yo"]
+atlas = ExtResource("1_xmihv")
+region = Rect2(40, 0, 10, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dakmh"]
+atlas = ExtResource("1_xmihv")
+region = Rect2(50, 0, 10, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xjiwp"]
+atlas = ExtResource("1_xmihv")
+region = Rect2(60, 0, 10, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iuany"]
+atlas = ExtResource("1_xmihv")
+region = Rect2(70, 0, 10, 92)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_id182"]
+atlas = ExtResource("1_xmihv")
+region = Rect2(80, 0, 10, 92)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4m2n"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7dhc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jjj73")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_412cd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q8rul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_788yo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dakmh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xjiwp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iuany")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_id182")
+}],
+"loop": true,
+"name": &"default",
+"speed": 30.0
+}]
+
+[node name="Laser" type="Node2D"]
+script = ExtResource("1_a7dhc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y4m2n")
+autoplay = "default"
+frame_progress = 0.39308977

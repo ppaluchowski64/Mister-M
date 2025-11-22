@@ -31,6 +31,6 @@ func _physics_process(_delta: float) -> void:
 		particles.emitting = true
 		broken = true
 		
-		if not sunk:
-			head.apply_impulse(Vector2(-20, 0))
+		if not sunk and head.state != head.State.DASH:
+			head.apply_impulse(-Vector2(max(head.linear_velocity.x / 5, 20), 0))
 			camera.shake()
