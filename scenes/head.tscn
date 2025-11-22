@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cidhl1487nc7r"]
+[gd_scene load_steps=13 format=3 uid="uid://cidhl1487nc7r"]
 
 [ext_resource type="Script" uid="uid://csbh80xoy52mk" path="res://scripts/head.gd" id="1_d75dd"]
 [ext_resource type="Shader" uid="uid://b6p8uuhhwbttl" path="res://shaders/outline.gdshader" id="2_a7yy4"]
 [ext_resource type="Texture2D" uid="uid://bfbgqbr1ch178" path="res://graphics/fade_effect.png" id="2_cwpmm"]
 [ext_resource type="Texture2D" uid="uid://dk7bcguyp5vyg" path="res://graphics/moscyc_head.png" id="2_d75dd"]
 [ext_resource type="Texture2D" uid="uid://b6eu7xaq6pdqn" path="res://graphics/glasses.png" id="5_6rdic"]
+[ext_resource type="AudioStream" uid="uid://cl0u6lv0bmtaj" path="res://audio/loop.wav" id="6_480qb"]
+[ext_resource type="AudioStream" uid="uid://ihet6u2t4vn7" path="res://audio/sfx/jump.wav" id="7_tctuf"]
+[ext_resource type="AudioStream" uid="uid://bmgy6vl3k6vwq" path="res://audio/sfx/alt-jump.wav" id="8_a62mm"]
+[ext_resource type="AudioStream" uid="uid://cx5susyw8yvrv" path="res://audio/sfx/dash.wav" id="9_wrqo8"]
 
 [sub_resource type="Gradient" id="Gradient_6rdic"]
 colors = PackedColorArray(1, 1, 1, 0.5, 1, 1, 1, 0)
@@ -20,7 +24,6 @@ radius = 13.0
 [node name="Head" type="RigidBody2D" groups=["head"]]
 linear_damp_mode = 1
 script = ExtResource("1_d75dd")
-input_mode = null
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false
@@ -64,6 +67,20 @@ one_shot = true
 [node name="FireCooldown" type="Timer" parent="."]
 wait_time = 15.0
 one_shot = true
+
+[node name="AudioLoop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_480qb")
+
+[node name="AudioJump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_tctuf")
+volume_db = -4.0
+max_polyphony = 4
+
+[node name="AudioBigJump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_a62mm")
+
+[node name="AudioDash" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_wrqo8")
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="LaserDeathTimer" to="." method="_on_laser_death_timer_timeout"]

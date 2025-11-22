@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://fxhuql5ud0qf"]
+[gd_scene load_steps=26 format=3 uid="uid://fxhuql5ud0qf"]
 
 [ext_resource type="PackedScene" uid="uid://cidhl1487nc7r" path="res://scenes/head.tscn" id="1_rf1xt"]
 [ext_resource type="Script" uid="uid://o6oil05p484t" path="res://scripts/game.gd" id="1_wcdyl"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dyy8pmdx20d2s" path="res://graphics/button.png" id="4_86ske"]
 [ext_resource type="Shader" uid="uid://b6p8uuhhwbttl" path="res://shaders/outline.gdshader" id="4_bq78c"]
 [ext_resource type="Texture2D" uid="uid://dq7cu2yb16k5f" path="res://graphics/guy.png" id="4_o8yes"]
+[ext_resource type="AudioStream" uid="uid://cy6ljsgwa30mx" path="res://audio/sfx/dead.wav" id="11_55u7g"]
 
 [sub_resource type="Animation" id="Animation_3rh43"]
 length = 0.001
@@ -506,7 +507,7 @@ libraries = {
 autoplay = "enter"
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
-repeat_size = Vector2(400, 0)
+repeat_size = Vector2(372, 0)
 repeat_times = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
@@ -515,7 +516,7 @@ texture = ExtResource("2_bq78c")
 flip_h = true
 
 [node name="Sprite2D2" type="Sprite2D" parent="Parallax2D"]
-position = Vector2(200, -20)
+position = Vector2(186, -20)
 texture = ExtResource("2_bq78c")
 
 [node name="Barriers" type="Node2D" parent="."]
@@ -529,7 +530,6 @@ body_sprite = NodePath("../Body")
 fire_tint = NodePath("../UI/FireTint")
 dash_indicator = NodePath("../UI/MarginContainer/AbilityBox/Control1/DashIndicator")
 fire_indicator = NodePath("../UI/MarginContainer/AbilityBox/Control2/FireIndicator")
-input_mode = 0
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
 material = SubResource("ShaderMaterial_1qygq")
@@ -566,6 +566,9 @@ offset_right = -41.0
 offset_bottom = 46.0
 theme_override_font_sizes/font_size = 16
 text = "highscore:-"
+
+[node name="AudioDeath" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_55u7g")
 
 [connection signal="pressed" from="UI/MarginContainer/ButtonsRight/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="timeout" from="BarrierSpawnTimer" to="." method="_on_barrier_spawn_timer_timeout"]

@@ -19,6 +19,11 @@ class_name Head
 
 @onready var glasses_sprite: Sprite2D = $GlassesSprite
 
+@onready var audio_loop: AudioStreamPlayer = $AudioLoop
+@onready var audio_jump: AudioStreamPlayer = $AudioJump
+@onready var audio_big_jump: AudioStreamPlayer = $AudioBigJump
+@onready var audio_dash: AudioStreamPlayer = $AudioDash
+
 enum State {BOUNCE, FLY, DASH}
 var state: State = State.BOUNCE
 
@@ -51,6 +56,10 @@ func _physics_process(_delta: float) -> void:
 				if input_mode == 1:
 					input_mode = 2
 					remove_child(glasses_sprite)
+					audio_loop.play()
+				
+				audio_big_jump.pitch_scale = 0.5
+				audio_big_jump.play(0.34)
 				
 				state = State.FLY
 				apply_impulse(Vector2i(200, -100))
@@ -65,6 +74,8 @@ func _physics_process(_delta: float) -> void:
 				restart.emit()
 			
 			if Input.is_action_just_pressed("dash") and dash_cooldown.is_stopped() and not on_fire:
+				audio_dash.play()
+				
 				state = State.DASH
 				sprite.frame = 1
 				dash_y = global_position.y
@@ -92,6 +103,10 @@ func _physics_process(_delta: float) -> void:
 				fire_cooldown.start()
 			
 			elif Input.is_action_just_pressed("up"):
+				audio_jump.pitch_scale = randf_range(0.8, 1.2)
+				audio_jump.volume_db = -16
+				audio_jump.play(0.11)
+				
 				if linear_velocity.x < 100:
 					linear_velocity.y = -120 * linear_velocity.x / 100 + 20
 				else:

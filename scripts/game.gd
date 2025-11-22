@@ -12,14 +12,18 @@ extends Node2D
 
 @export var ui_animation: AnimationPlayer
 
+@onready var audio_death: AudioStreamPlayer = $AudioDeath
+
 var score: float = 0
 var highscore: float = 0
 var on_tutorial: bool = false
+var may_spawn_laser: bool = true
 
 var tutorial_tween: Tween
 
 func _ready() -> void:
 	head.restart.connect(on_restart)
+	head.fire_cooldown.timeout.connect(set.bind("may_spawn_laser", true))
 	
 	if FileAccess.file_exists("user://gamedata.data"):
 		var file: FileAccess = FileAccess.open("user://gamedata.data", FileAccess.READ)
@@ -47,9 +51,10 @@ func _physics_process(_delta: float) -> void:
 		tutorial_tween.tween_callback(get_tree().reload_current_scene)
 
 func _on_barrier_spawn_timer_timeout() -> void:
-	if head.fire_cooldown.is_stopped() and randi_range(0, 4) == 0:
+	if may_spawn_laser and randi_range(0, 4) == 0:
 		var laser: Laser = Laser.instantiate()
 		laser.global_position = Vector2(int(head.global_position.x) + 300.5, -13.5)
+		laser.last.connect(set.bind("may_spawn_laser", false))
 		barriers.add_child(laser)
 	else:
 		var barrier: Barrier = Barrier.instantiate()
@@ -57,6 +62,8 @@ func _on_barrier_spawn_timer_timeout() -> void:
 		barriers.add_child(barrier)
 
 func on_restart() -> void:
+	audio_death.play(0.3)
+	
 	head.global_position.x = 0
 	head.linear_velocity = Vector2.ZERO
 	head.state = head.State.BOUNCE
@@ -73,6 +80,7 @@ func on_restart() -> void:
 		barrier.queue_free()
 	
 	barrier_spawn_timer.stop()
+	may_spawn_laser = true
 	
 	if score > highscore:
 		highscore = score

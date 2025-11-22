@@ -6,11 +6,15 @@ class_name Laser
 
 var broken: bool = false
 
+signal last
+
 static func instantiate() -> Laser:
 	return preload("res://scenes/laser.tscn").instantiate() as Laser
 
 func _physics_process(_delta: float) -> void:
 	if head.global_position.x + 10 > global_position.x and not broken:
+		last.emit()
+		
 		if not head.on_fire:
 			camera.shake()
 			
