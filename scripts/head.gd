@@ -7,6 +7,8 @@ class_name Head
 enum State {BOUNCE, FLY}
 var state: State = State.BOUNCE
 
+signal restart
+
 func _physics_process(_delta: float) -> void:
 	match state:
 		State.BOUNCE:
@@ -28,6 +30,9 @@ func _physics_process(_delta: float) -> void:
 			apply_force(Vector2(0, -700))
 			
 			angular_velocity = 2
+			
+			if linear_velocity.x < 26:
+				restart.emit()
 			
 			if Input.is_action_just_pressed("up"):
 				if linear_velocity.x < 100:

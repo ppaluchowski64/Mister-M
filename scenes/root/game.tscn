@@ -57,10 +57,12 @@ distance = -91.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bq78c"]
 distance = -4.0
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("head", "score_label")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("head", "score_label", "barriers", "barrier_spawn_timer")]
 script = ExtResource("1_wcdyl")
 head = NodePath("Head")
 score_label = NodePath("UI/MarginContainer/ScoreLabel")
+barriers = NodePath("Barriers")
+barrier_spawn_timer = NodePath("BarrierSpawnTimer")
 
 [node name="UI" type="CanvasLayer" parent="."]
 
@@ -92,13 +94,13 @@ flip_h = true
 position = Vector2(200, -20)
 texture = ExtResource("2_bq78c")
 
-[node name="Bariers" type="Node2D" parent="."]
+[node name="Barriers" type="Node2D" parent="."]
 
-[node name="BarierSpawnTimer" type="Timer" parent="."]
+[node name="BarrierSpawnTimer" type="Timer" parent="."]
 
 [node name="Head" parent="." node_paths=PackedStringArray("barrier_spawn_timer", "body_sprite") instance=ExtResource("1_rf1xt")]
 position = Vector2(0, -20)
-barrier_spawn_timer = NodePath("../BarierSpawnTimer")
+barrier_spawn_timer = NodePath("../BarrierSpawnTimer")
 body_sprite = NodePath("../Body")
 
 [node name="Body" type="AnimatedSprite2D" parent="."]
@@ -123,9 +125,9 @@ shape = SubResource("WorldBoundaryShape2D_1qygq")
 [node name="CollisionShapeTop" type="CollisionShape2D" parent="StaticBody"]
 shape = SubResource("WorldBoundaryShape2D_bq78c")
 
-[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("head")]
+[node name="Camera" type="Camera2D" parent="." node_paths=PackedStringArray("head") groups=["camera"]]
 position = Vector2(0, -20)
 script = ExtResource("2_7dpn4")
 head = NodePath("../Head")
 
-[connection signal="timeout" from="BarierSpawnTimer" to="." method="_on_barier_spawn_timer_timeout"]
+[connection signal="timeout" from="BarrierSpawnTimer" to="." method="_on_barrier_spawn_timer_timeout"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://buiabvqr85id8"]
+[gd_scene load_steps=7 format=3 uid="uid://buiabvqr85id8"]
 
 [ext_resource type="Script" uid="uid://xmdeje1wdqc4" path="res://scripts/weak_point.gd" id="1_xaocv"]
 [ext_resource type="Texture2D" uid="uid://ccsdhhoiyc8r7" path="res://graphics/point.png" id="2_xaocv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xaocv"]
 
 [sub_resource type="Animation" id="Animation_xaocv"]
 resource_name = "pulse"
@@ -72,8 +74,15 @@ script = ExtResource("1_xaocv")
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_xaocv")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_xaocv")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_22qmg")
 }
 autoplay = "pulse"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

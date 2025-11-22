@@ -1,11 +1,39 @@
-[gd_scene load_steps=3 format=3 uid="uid://c52ei806j63g3"]
+[gd_scene load_steps=4 format=3 uid="uid://c52ei806j63g3"]
 
 [ext_resource type="Script" uid="uid://4fus2nfgqu5r" path="res://scripts/barrier.gd" id="1_8ilpk"]
 [ext_resource type="Texture2D" uid="uid://ciyhqvv2k1lav" path="res://graphics/barrier.png" id="2_8ilpk"]
 
+[sub_resource type="Curve" id="Curve_8ilpk"]
+_data = [Vector2(0, 1), 0.0, -2.0, 0, 1, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 1, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
 [node name="Barrier" type="Node2D"]
 script = ExtResource("1_8ilpk")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="PolygonMask" type="Polygon2D" parent="."]
+color = Color(1, 1, 1, 0)
+invert_enabled = true
+polygon = PackedVector2Array(-8, 24, 8, 24, 8, 0, -8, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="PolygonMask"]
 texture = ExtResource("2_8ilpk")
 flip_h = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(0, 12)
+emitting = false
+amount = 16
+one_shot = true
+explosiveness = 0.9
+emission_shape = 3
+emission_rect_extents = Vector2(6, 12)
+particle_flag_align_y = true
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 50.0
+damping_min = 100.0
+damping_max = 200.0
+scale_amount_max = 6.0
+scale_amount_curve = SubResource("Curve_8ilpk")
+color = Color(0.5803922, 0.59607846, 0.67058825, 1)
