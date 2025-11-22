@@ -11,6 +11,7 @@ extends Node2D
 @export var highscore_label: Label
 
 @export var ui_animation: AnimationPlayer
+@export var secrets: Node2D
 
 @onready var audio_death: AudioStreamPlayer = $AudioDeath
 
@@ -63,6 +64,9 @@ func _on_barrier_spawn_timer_timeout() -> void:
 
 func on_restart() -> void:
 	audio_death.play(0.3)
+	
+	for secret in secrets.get_children():
+		secret.queue_free()
 	
 	head.global_position.x = 0
 	head.linear_velocity = Vector2.ZERO
