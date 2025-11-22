@@ -2,6 +2,8 @@ extends RigidBody2D
 class_name Head
 
 @export var barrier_spawn_timer: Timer
+@export var apple_spawn_timer: Timer
+
 @export var body_sprite: AnimatedSprite2D
 @export var fire_tint: ColorRect
 
@@ -63,7 +65,9 @@ func _physics_process(_delta: float) -> void:
 				
 				state = State.FLY
 				apply_impulse(Vector2i(200, -100))
+				
 				barrier_spawn_timer.start()
+				apple_spawn_timer.start()
 		
 		State.FLY:
 			apply_force(Vector2(0, -700))
@@ -140,3 +144,6 @@ func _on_fire_timer_timeout() -> void:
 	
 	fire_tint_tween = create_tween()
 	fire_tint_tween.tween_property(fire_tint, "color:a", 0, 1.5)
+
+func _on_dash_cooldown_timeout() -> void:
+	dash_cooldown.wait_time = 10

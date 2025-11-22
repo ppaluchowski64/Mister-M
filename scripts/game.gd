@@ -1,8 +1,13 @@
 extends Node2D
 
 @export var head: Head
+
 @export var barriers: Node2D
 @export var barrier_spawn_timer: Timer
+
+@export var apples: Node2D
+@export var apple_spawn_timer: Timer
+
 @export var camera: Camera2D
 @export var ui: CanvasLayer
 @export var tutorial: Sprite2D
@@ -83,7 +88,11 @@ func on_restart() -> void:
 	for barrier in barriers.get_children():
 		barrier.queue_free()
 	
+	for apple in apples.get_children():
+		apple.queue_free()
+	
 	barrier_spawn_timer.stop()
+	apple_spawn_timer.stop()
 	may_spawn_laser = true
 	
 	if score > highscore:
@@ -109,3 +118,10 @@ func _on_tutorial_button_pressed() -> void:
 	tutorial_tween.set_trans(Tween.TRANS_CUBIC)
 	
 	tutorial_tween.tween_property(camera, "global_position:y", 200, 1)
+
+func _on_apple_spawn_timer_timeout() -> void:
+	apple_spawn_timer.wait_time = 8
+	
+	var apple: Apple = Apple.instantiate()
+	apple.global_position = Vector2(int(head.global_position.x) + 300, randi_range(-25, 25))
+	apples.add_child(apple)

@@ -343,11 +343,13 @@ distance = -91.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_bq78c"]
 distance = -4.0
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("head", "barriers", "barrier_spawn_timer", "camera", "ui", "tutorial", "score_label", "highscore_label", "ui_animation", "secrets")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("head", "barriers", "barrier_spawn_timer", "apples", "apple_spawn_timer", "camera", "ui", "tutorial", "score_label", "highscore_label", "ui_animation", "secrets")]
 script = ExtResource("1_wcdyl")
 head = NodePath("Head")
 barriers = NodePath("Barriers")
 barrier_spawn_timer = NodePath("BarrierSpawnTimer")
+apples = NodePath("Apples")
+apple_spawn_timer = NodePath("AppleSpawnTimer")
 camera = NodePath("Camera")
 ui = NodePath("UI")
 tutorial = NodePath("Tutorial")
@@ -530,9 +532,15 @@ secrets = NodePath("../../Secrets")
 
 [node name="BarrierSpawnTimer" type="Timer" parent="."]
 
-[node name="Head" parent="." node_paths=PackedStringArray("barrier_spawn_timer", "body_sprite", "fire_tint", "dash_indicator", "fire_indicator") instance=ExtResource("1_rf1xt")]
+[node name="Apples" type="Node2D" parent="."]
+
+[node name="AppleSpawnTimer" type="Timer" parent="."]
+wait_time = 8.25
+
+[node name="Head" parent="." node_paths=PackedStringArray("barrier_spawn_timer", "apple_spawn_timer", "body_sprite", "fire_tint", "dash_indicator", "fire_indicator") instance=ExtResource("1_rf1xt")]
 position = Vector2(0, -25)
 barrier_spawn_timer = NodePath("../BarrierSpawnTimer")
+apple_spawn_timer = NodePath("../AppleSpawnTimer")
 body_sprite = NodePath("../Body")
 fire_tint = NodePath("../UI/FireTint")
 dash_indicator = NodePath("../UI/MarginContainer/AbilityBox/Control1/DashIndicator")
@@ -579,3 +587,4 @@ stream = ExtResource("11_55u7g")
 
 [connection signal="pressed" from="UI/MarginContainer/ButtonsRight/TutorialButton" to="." method="_on_tutorial_button_pressed"]
 [connection signal="timeout" from="BarrierSpawnTimer" to="." method="_on_barrier_spawn_timer_timeout"]
+[connection signal="timeout" from="AppleSpawnTimer" to="." method="_on_apple_spawn_timer_timeout"]

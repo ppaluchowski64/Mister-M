@@ -83,5 +83,6 @@ stream = ExtResource("8_a62mm")
 stream = ExtResource("9_wrqo8")
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashCooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="LaserDeathTimer" to="." method="_on_laser_death_timer_timeout"]
 [connection signal="timeout" from="FireTimer" to="." method="_on_fire_timer_timeout"]
